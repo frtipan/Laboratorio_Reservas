@@ -29,8 +29,8 @@ jobs:
       run: npx eslint src/
 
     - name: Iniciar servidor
-      run: npm start &
-      
+      run: npm run dev &
+
     - name: Esperar servidor
       run: sleep 10
 
