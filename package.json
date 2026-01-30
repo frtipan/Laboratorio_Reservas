@@ -4,7 +4,7 @@
   "main": "src/server.js",
   "type": "commonjs",
   "scripts": {
-    "test": "npx jest",
+    "test": "node ./node_modules/jest/bin/jest.js",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
   },
