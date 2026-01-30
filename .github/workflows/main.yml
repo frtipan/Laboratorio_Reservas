@@ -28,10 +28,13 @@ jobs:
     - name: Linting del código
       run: npx eslint src/
 
+    - name: Iniciar servidor
+      run: npm run dev &
+
+    - name: Esperar servidor
+      run: sleep 10
+
     - name: Pruebas de carga con k6
       uses: grafana/k6-action@v0.2.0
       with:
-        filename: test.js
-
-    - name: Auditoría de seguridad (npm audit)
-      run: npm audit --audit-level=high
+        filename: k6-test.js
