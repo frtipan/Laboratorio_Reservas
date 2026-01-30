@@ -1,0 +1,36 @@
+name: Pruebas de Sistema y Seguridad
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v3
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Instalar dependencias
+      run: npm install
+
+    - name: Ejecutar pruebas unitarias
+      run: npm test
+
+    - name: Ejecutar pruebas de carga con k6
+      uses: grafana/k6-action@v0.2.0
+      with:
+        script: test.js
+
+    - name: Ejecutar pruebas de seguridad con OWASP ZAP
+      uses: zaproxy/action-full-scan@v0.7.0
+      with:
+        target: 'http://localhost:3000'
